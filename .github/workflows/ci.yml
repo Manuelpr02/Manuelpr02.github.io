@@ -4,11 +4,11 @@ on:
     branches:
       - master
       - main
-permissions:
-  contents: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Configure Git Credentials
