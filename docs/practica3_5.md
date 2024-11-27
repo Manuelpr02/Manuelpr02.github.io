@@ -4,7 +4,7 @@
 Primero se actualiza los paquetes y se instala el gestor de paquetes de Python. <br>
 ![alt text](/images2/image-1.png)
 Luego se instala el paquete pipenv para entornos virtuales. <br>
-![alt text](/images2/image-2.png)
+![alt text](/images2/image-2.png) <br>
 Se crea el directorio para el proyecto, se le da los permisos para que el propio usuario sea el dueño y pertenezca al grupo www-data. Luego se le dan permisos y se crea un archivo oculto. <br>
 ![alt text](/images2/image-4.png)
 
@@ -13,12 +13,12 @@ Se edita con las siguientes variables. <br>
 ![alt text](/images2/image-5.png)
 ![alt text](/images2/image-6.png)
 Se inicia el entorno virtual que carga las variables del fichero .env y se instalan las dependecias necesarias. <br>
-![alt text](/images2/image-7.png)
+![alt text](/images2/image-7.png)<br>
 Se crea una aplicación sencilla que tendrá los siguientes archivos. <br>
-![alt text](/images2/image-8.png)
+![alt text](/images2/image-8.png) <br>
 Se editan los archivos para que queden así: <br>
 ![alt text](/images2/image-9.png)
-![alt text](/images2/image-10.png)
+![alt text](/images2/image-10.png) <br>
 Se ejecuta la aplicación. <br>
 ![alt text](/images2/image-11.png)
 Se comprueba en la máquina anfitrión con la ip de la virtual y el puerto 5000. <br>
@@ -38,7 +38,7 @@ Ahora como en prácticas anteriores se crea un archivo de configuración con los
 Y se crea el enlace simbólico comprobando su creación. <br>
 ![alt text](/images2/image-19.png)
 Se reinicia nginx y se añade la ip y el server_name al fichero host de la maquina anfitriona. <br>
-![alt text](/images2/image-20.png)
+![alt text](/images2/image-20.png) <br>
 Se comprueba que se ha desplegado. <br>
 ![alt text](/images2/image-21.png)
 
@@ -50,12 +50,12 @@ Luego se accede a la carpeta de la práctica, se crea el fichero .env y se modif
 Se inicia el entorno virtual. <br>
 ![alt text](/images2/image-24.png)
 Se instalan las dependecias. <br>
-![alt text](/images2/image-25.png)
+![alt text](/images2/image-25.png) <br>
 ![alt text](/images2/image-26.png)
 Se modifican los ficheros y se inicia el entorno virtual. <br>
-![alt text](/images2/image-28.png)
+![alt text](/images2/image-28.png) <br>
 Se comprueba que se ha desplegado bien. <br>
-![alt text](/images2/image-29.png)
+![alt text](/images2/image-29.png) <br>
 Ahora se comprueba que gunicorn funciona con el comando: gunicorn --workers 4 --bind 0.0.0.0:5000 wsgi:app. Después se obtiene la ruta para configurar más adelante con which unicorn y por último se para el entorno virtual. <br>
 ![alt text](/images2/image-30.png)
 
