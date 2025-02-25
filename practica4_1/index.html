@@ -1,0 +1,1090 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/practica4_1/">
+      
+      
+        <link rel="prev" href="../practica3_5/">
+      
+      
+        <link rel="next" href="../practica5_1/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+    
+    
+      
+        <title>Práctica 4.1 - Configuración de un servidor DNS - Prácticas DAW</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practica-41-configuracion-de-un-servidor-dns" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Prácticas DAW" class="md-header__button md-logo" aria-label="Prácticas DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Prácticas DAW
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Práctica 4.1 - Configuración de un servidor DNS
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Prácticas DAW" class="md-nav__button md-logo" aria-label="Prácticas DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Prácticas DAW
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prácticas realizadas por Manuel Peñas Redondo 2º DESARROLLO APLICACIONES WEB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.1 – Instalación y configuración de servidor web Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.2 - Autenticación en un servidor web Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.3 – Proxy inverso con Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.4 – Balanceo de carga con proxy inverso en Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practica 2.5 - Proxy inverso y balanceo de carga con SSL en NGINX
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica3_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.1: Instalación de Tomcat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica3_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.2 - Despliegue de aplicaciones con Node Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica3_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.4: Despliegue de una aplicación una aplicación React en Netlify (PaaS)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica3_5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.5: Despliegue de una aplicación Flask (Python)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Práctica 4.1 - Configuración de un servidor DNS
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 4.1 - Configuración de un servidor DNS
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-de-servidor-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de servidor DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del servidor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración del servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-namedconfoptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración named.conf.options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-namedconflocal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración named.conf.local
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-del-archivo-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del archivo de zona
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-del-archivo-de-zona-para-la-resolucion-inversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del archivo de zona para la resolución inversa
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-las-configuraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de las configuraciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-las-resoluciones-y-de-las-consultas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de las resoluciones y de las consultas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuestiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestiones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cuestiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-1-que-pasara-si-un-cliente-de-una-red-diferente-a-la-tuya-intenta-hacer-uso-de-tu-dns-de-alguna-manera-le-funcionarapor-que-en-que-parte-de-la-configuracion-puede-verse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 1. ¿Qué pasará si un cliente de una red diferente a la tuya intenta hacer uso de tu DNS de alguna manera, le funcionará?¿Por qué, en qué parte de la configuración puede verse?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-2-por-que-tenemos-que-permitir-las-consultas-recursivas-en-la-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 2. ¿Por qué tenemos que permitir las consultas recursivas en la configuración?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-3-el-servidor-dns-que-acabais-de-montar-es-autoritativopor-que" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 3. El servidor DNS que acabáis de montar, ¿es autoritativo?¿Por qué?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-4-donde-podemos-encontrar-la-directiva-origin-y-para-que-sirve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 4. ¿Dónde podemos encontrar la directiva $ORIGIN y para qué sirve?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-5-una-zona-es-identico-a-un-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 5. ¿Una zona es idéntico a un dominio?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-6-pueden-editarse-los-archivos-de-zona-de-un-servidor-esclavosecundario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 6. ¿Pueden editarse los archivos de zona de un servidor esclavo/secundario?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-7-por-que-podria-querer-tener-mas-de-un-servidor-esclavo-para-una-misma-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 7. ¿Por qué podría querer tener más de un servidor esclavo para una misma zona?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-8-cuantos-servidores-raiz-existen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 8. ¿Cuántos servidores raíz existen?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-9-que-es-una-consulta-iterativa-de-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 9. ¿Qué es una consulta iterativa de referencia?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-10-en-una-resolucion-inversa-a-que-nombre-se-mapearia-la-direccion-ip-172163456" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 10. En una resolución inversa, ¿a qué nombre se mapearía la dirección IP 172.16.34.56?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica5_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enunciado ejercicios Git y GitHub I y II
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica6_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 6.1 - Dockerización del despliegue de una aplicación Node.js
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica6_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 6.2 - Despliegue de una aplicación PHP con Nginx y MySQL usando Docker y docker-compose
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica6_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 6.3 - Despliegue de servidores web con usuarios autenticados mediante LDAP usando Docker y docker-compose
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practicaampliada/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica Ampliada
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-de-servidor-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalación de servidor DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-del-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración del servidor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración del servidor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-namedconfoptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración named.conf.options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-namedconflocal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuración named.conf.local
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-del-archivo-de-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del archivo de zona
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creacion-del-archivo-de-zona-para-la-resolucion-inversa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creación del archivo de zona para la resolución inversa
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-las-configuraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de las configuraciones
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comprobacion-de-las-resoluciones-y-de-las-consultas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comprobación de las resoluciones y de las consultas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuestiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestiones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cuestiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-1-que-pasara-si-un-cliente-de-una-red-diferente-a-la-tuya-intenta-hacer-uso-de-tu-dns-de-alguna-manera-le-funcionarapor-que-en-que-parte-de-la-configuracion-puede-verse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 1. ¿Qué pasará si un cliente de una red diferente a la tuya intenta hacer uso de tu DNS de alguna manera, le funcionará?¿Por qué, en qué parte de la configuración puede verse?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-2-por-que-tenemos-que-permitir-las-consultas-recursivas-en-la-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 2. ¿Por qué tenemos que permitir las consultas recursivas en la configuración?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-3-el-servidor-dns-que-acabais-de-montar-es-autoritativopor-que" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 3. El servidor DNS que acabáis de montar, ¿es autoritativo?¿Por qué?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-4-donde-podemos-encontrar-la-directiva-origin-y-para-que-sirve" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 4. ¿Dónde podemos encontrar la directiva $ORIGIN y para qué sirve?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-5-una-zona-es-identico-a-un-dominio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 5. ¿Una zona es idéntico a un dominio?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-6-pueden-editarse-los-archivos-de-zona-de-un-servidor-esclavosecundario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 6. ¿Pueden editarse los archivos de zona de un servidor esclavo/secundario?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-7-por-que-podria-querer-tener-mas-de-un-servidor-esclavo-para-una-misma-zona" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 7. ¿Por qué podría querer tener más de un servidor esclavo para una misma zona?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-8-cuantos-servidores-raiz-existen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 8. ¿Cuántos servidores raíz existen?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-9-que-es-una-consulta-iterativa-de-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 9. ¿Qué es una consulta iterativa de referencia?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-10-en-una-resolucion-inversa-a-que-nombre-se-mapearia-la-direccion-ip-172163456" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestión 10. En una resolución inversa, ¿a qué nombre se mapearía la dirección IP 172.16.34.56?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="practica-41-configuracion-de-un-servidor-dns">Práctica 4.1 - Configuración de un servidor DNS</h1>
+<h2 id="instalacion-de-servidor-dns">Instalación de servidor DNS</h2>
+<p>Lo primero es conectarse por SSH a la máquina física como se muestra en la foto. <br>
+<img alt="alt text" src="/images3/image-74.png" />
+Una vez conectado, se instala el servidor DNS con el siguiente comando. <br>
+<img alt="alt text" src="/images3/image-75.png" /></p>
+<h2 id="configuracion-del-servidor">Configuración del servidor</h2>
+<p>Lo primero para configurarlo es modificar el archivo named como se muestra en la imagen para indicar que solo se puede utilizar IPv4. <br>
+<img alt="alt text" src="/images3/image-76.png" />
+Para comprobar que la configuración es correcta se mira que el siguiente archivo tenga las mismas líneas que la imagen. <br>
+<img alt="alt text" src="/images3/image-77.png" /></p>
+<h3 id="configuracion-namedconfoptions">Configuración named.conf.options</h3>
+<p>Para configurar el archivo named.conf.options se hace una copia de seguridad de emergencia lo primero. <br>
+<img alt="alt text" src="/images3/image-78.png" />
+Ahora se añade las primeras líneas para indicar que solo la ip que se usa sea aceptada. Lo único que se modifica es el tercer dígito que se pone el de la propia red y luego el resto de líneas tienen que quedar como en la imagen para dar permisos o no a los clientes y para habilitar el DNSSEC.<br>
+<img alt="alt text" src="/images3/image-79.png" />
+Una vez modificado se comprueba que funciona y se reinicia para guardar las modificaciones. <br>
+<img alt="alt text" src="/images3/image-80.png" /></p>
+<h3 id="configuracion-namedconflocal">Configuración named.conf.local</h3>
+<p>Se habilita la zona deaw.es  y se indica que el servidor es maestro para la zona, indicando la ruta donde se encuentra el archivo. <br>
+<img alt="alt text" src="/images3/image-81.png" />   </p>
+<h3 id="creacion-del-archivo-de-zona">Creación del archivo de zona</h3>
+<p>Se crea el archivo en la ruta indicada antes con las siguientes características manteniendo la forma del texto. <br>
+<img alt="alt text" src="/images3/image-82.png" /></p>
+<h3 id="creacion-del-archivo-de-zona-para-la-resolucion-inversa">Creación del archivo de zona para la resolución inversa</h3>
+<p>Se añade ahora la zona nueva con la IP de la red y se indica la ruta del archivo. <br>
+<img alt="alt text" src="/images3/image-83.png" />
+Nuevamente se crea el archivo con los siguientes datos manteniendo la estructura del texto. <br>
+<img alt="alt text" src="/images3/image-84.png" /></p>
+<h3 id="comprobacion-de-las-configuraciones">Comprobación de las configuraciones</h3>
+<p>Para comprobar la configuración se ejecutan los siguientes comandos. Primero se comprueba cada zona de forma individual y luego relacionándolas. Si devuelve OK estará correcto. <br>
+<img alt="alt text" src="/images3/image-85.png" />
+<img alt="alt text" src="/images3/image-86.png" />
+Una vez comprobado se reinicia el servidor para guardar los cambios. <br>
+<img alt="alt text" src="/images3/image-87.png" /></p>
+<h3 id="comprobacion-de-las-resoluciones-y-de-las-consultas">Comprobación de las resoluciones y de las consultas</h3>
+<p>Para finalizar las comprobaciones se modifica el siguiente archivo añadiendo la IP de casa para establecer el cliente. <br>
+<img alt="alt text" src="/images3/image-88.png" />
+Por último se hace la comprobación primero con dig, se hace con deaw.es y sale como en la imagen donde indica que se ha producido una respuesta y luego con la IP saldría igual. <br>
+<img alt="alt text" src="/images3/image-89.png" />
+Y con nslookup se hace como en la imagen con deaw.es y con la IP se haría igual. <br>
+<img alt="alt text" src="/images3/image-90.png" /></p>
+<h2 id="cuestiones">Cuestiones</h2>
+<h4 id="cuestion-1-que-pasara-si-un-cliente-de-una-red-diferente-a-la-tuya-intenta-hacer-uso-de-tu-dns-de-alguna-manera-le-funcionarapor-que-en-que-parte-de-la-configuracion-puede-verse">Cuestión 1. ¿Qué pasará si un cliente de una red diferente a la tuya intenta hacer uso de tu DNS de alguna manera, le funcionará?¿Por qué, en qué parte de la configuración puede verse?</h4>
+<p>No porque se restringe a clientes confiables con la directiva allow-recursion {confiables;}; y solo mi IP está registrada.</p>
+<h4 id="cuestion-2-por-que-tenemos-que-permitir-las-consultas-recursivas-en-la-configuracion">Cuestión 2. ¿Por qué tenemos que permitir las consultas recursivas en la configuración?</h4>
+<p>Para que el servidor pueda resolver los nombres de dominios que no están en su zona autoritaria.</p>
+<h4 id="cuestion-3-el-servidor-dns-que-acabais-de-montar-es-autoritativopor-que">Cuestión 3. El servidor DNS que acabáis de montar, ¿es autoritativo?¿Por qué?</h4>
+<p>Sí porque se indica type master en la zona específica.</p>
+<h4 id="cuestion-4-donde-podemos-encontrar-la-directiva-origin-y-para-que-sirve">Cuestión 4. ¿Dónde podemos encontrar la directiva $ORIGIN y para qué sirve?</h4>
+<p>Se encuentra en los archivos de zona DNS y se encarga de definir el dominio raíz de los registros del archivo. </p>
+<h4 id="cuestion-5-una-zona-es-identico-a-un-dominio">Cuestión 5. ¿Una zona es idéntico a un dominio?</h4>
+<p>No, un dominio puede dividirse en múltiple zonas porque el dominio es el conjunto de nombre y subdominios bajo un TLD</p>
+<h4 id="cuestion-6-pueden-editarse-los-archivos-de-zona-de-un-servidor-esclavosecundario">Cuestión 6. ¿Pueden editarse los archivos de zona de un servidor esclavo/secundario?</h4>
+<p>Directamente no, se debe hacer desde el servidor maestro.</p>
+<h4 id="cuestion-7-por-que-podria-querer-tener-mas-de-un-servidor-esclavo-para-una-misma-zona">Cuestión 7. ¿Por qué podría querer tener más de un servidor esclavo para una misma zona?</h4>
+<p>Por si falla uno tener otro disponible, para tener un balanceo de carga y para evitar la redundancia de datos. </p>
+<h4 id="cuestion-8-cuantos-servidores-raiz-existen">Cuestión 8. ¿Cuántos servidores raíz existen?</h4>
+<p>Existen 13 servidores raíz.</p>
+<h4 id="cuestion-9-que-es-una-consulta-iterativa-de-referencia">Cuestión 9. ¿Qué es una consulta iterativa de referencia?</h4>
+<p>Una consulta iterativa de referencia es cuando un servidor DNS no realiza una búsqueda completa por sí mismo y responde con la dirección de otro servidor DNS más específico. </p>
+<h4 id="cuestion-10-en-una-resolucion-inversa-a-que-nombre-se-mapearia-la-direccion-ip-172163456">Cuestión 10. En una resolución inversa, ¿a qué nombre se mapearía la dirección IP 172.16.34.56?</h4>
+<p>Se mapearía como 56.34.16.172.in-addr.arpa.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>

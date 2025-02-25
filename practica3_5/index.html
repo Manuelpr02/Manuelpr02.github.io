@@ -1,0 +1,874 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/practica3_5/">
+      
+      
+        <link rel="prev" href="../practica3_4/">
+      
+      
+        <link rel="next" href="../practica4_1/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+    
+    
+      
+        <title>Práctica 3.5: Despliegue de una aplicación Flask (Python) - Prácticas DAW</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#practica-35-despliegue-de-una-aplicacion-flask-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Prácticas DAW" class="md-header__button md-logo" aria-label="Prácticas DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Prácticas DAW
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Práctica 3.5: Despliegue de una aplicación Flask (Python)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Prácticas DAW" class="md-nav__button md-logo" aria-label="Prácticas DAW" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Prácticas DAW
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Prácticas realizadas por Manuel Peñas Redondo 2º DESARROLLO APLICACIONES WEB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.1 – Instalación y configuración de servidor web Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.2 - Autenticación en un servidor web Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.3 – Proxy inverso con Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 2.4 – Balanceo de carga con proxy inverso en Nginx
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica2_5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Practica 2.5 - Proxy inverso y balanceo de carga con SSL en NGINX
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica3_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.1: Instalación de Tomcat
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica3_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.2 - Despliegue de aplicaciones con Node Express
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica3_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.4: Despliegue de una aplicación una aplicación React en Netlify (PaaS)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Práctica 3.5: Despliegue de una aplicación Flask (Python)
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 3.5: Despliegue de una aplicación Flask (Python)
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalaciones
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-flask-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Flask inicial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-nginx-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Nginx inicial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-flask-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Flask repositorio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-nginx-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Nginx repositorio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuestiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestiones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cuestiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-1-busca-lee-entiende-y-explica-que-es-y-para-que-sirve-un-servidor-wsgi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestion 1. Busca, lee, entiende y explica qué es y para que sirve un servidor WSGI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica4_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 4.1 - Configuración de un servidor DNS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica5_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enunciado ejercicios Git y GitHub I y II
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica6_1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 6.1 - Dockerización del despliegue de una aplicación Node.js
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica6_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 6.2 - Despliegue de una aplicación PHP con Nginx y MySQL usando Docker y docker-compose
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practica6_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica 6.3 - Despliegue de servidores web con usuarios autenticados mediante LDAP usando Docker y docker-compose
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../practicaampliada/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Práctica Ampliada
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#instalaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instalaciones
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-flask-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Flask inicial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-nginx-inicial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Nginx inicial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-flask-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Flask repositorio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#despliegue-con-nginx-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Despliegue con Nginx repositorio
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuestiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestiones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cuestiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cuestion-1-busca-lee-entiende-y-explica-que-es-y-para-que-sirve-un-servidor-wsgi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuestion 1. Busca, lee, entiende y explica qué es y para que sirve un servidor WSGI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="practica-35-despliegue-de-una-aplicacion-flask-python">Práctica 3.5: Despliegue de una aplicación Flask (Python)</h1>
+<h2 id="instalaciones">Instalaciones</h2>
+<p>Primero se actualiza los paquetes y se instala el gestor de paquetes de Python. <br>
+<img alt="alt text" src="/images2/image-1.png" />
+Luego se instala el paquete pipenv para entornos virtuales. <br>
+<img alt="alt text" src="/images2/image-2.png" /> <br>
+Se crea el directorio para el proyecto, se le da los permisos para que el propio usuario sea el dueño y pertenezca al grupo www-data. Luego se le dan permisos y se crea un archivo oculto. <br>
+<img alt="alt text" src="/images2/image-4.png" /></p>
+<h2 id="despliegue-con-flask-inicial">Despliegue con Flask inicial</h2>
+<p>Se edita con las siguientes variables. <br>
+<img alt="alt text" src="/images2/image-5.png" />
+<img alt="alt text" src="/images2/image-6.png" />
+Se inicia el entorno virtual que carga las variables del fichero .env y se instalan las dependecias necesarias. <br>
+<img alt="alt text" src="/images2/image-7.png" /><br>
+Se crea una aplicación sencilla que tendrá los siguientes archivos. <br>
+<img alt="alt text" src="/images2/image-8.png" /> <br>
+Se editan los archivos para que queden así: <br>
+<img alt="alt text" src="/images2/image-9.png" />
+<img alt="alt text" src="/images2/image-10.png" /> <br>
+Se ejecuta la aplicación. <br>
+<img alt="alt text" src="/images2/image-11.png" />
+Se comprueba en la máquina anfitrión con la ip de la virtual y el puerto 5000. <br>
+<img alt="alt text" src="/images2/image-12.png" />
+Ahora se comprueba que gunicorn funciona con el comando: gunicorn --workers 4 --bind 0.0.0.0:5000 wsgi:app. Después se obtiene la ruta para configurar más adelante. Por último se para el entorno virtual. <br>
+<img alt="alt text" src="/images2/image-13.png" /></p>
+<h2 id="despliegue-con-nginx-inicial">Despliegue con Nginx inicial</h2>
+<p>Suponiendo que está instalado Nginx de prácticas anteriores se inicia y se comprueba que está activo. <br>
+<img alt="alt text" src="/images2/image-14.png" />
+Se crea un fichero en systemd y se rellena así pero usando los datos de cada uno como la ruta de antes. <br>
+<img alt="alt text" src="/images2/image-15.png" />
+Ahora se habilita y se inicia el servicio. <br>
+<img alt="alt text" src="/images2/image-17.png" />
+Ahora como en prácticas anteriores se crea un archivo de configuración con los siguientes datos pero adaptados a cada usuario. <br>
+<img alt="alt text" src="/images2/image-18.png" />
+Y se crea el enlace simbólico comprobando su creación. <br>
+<img alt="alt text" src="/images2/image-19.png" />
+Se reinicia nginx y se añade la ip y el server_name al fichero host de la maquina anfitriona. <br>
+<img alt="alt text" src="/images2/image-20.png" /> <br>
+Se comprueba que se ha desplegado. <br>
+<img alt="alt text" src="/images2/image-21.png" /></p>
+<h2 id="despliegue-con-flask-repositorio">Despliegue con Flask repositorio</h2>
+<p>Primero se clona el repositorio y se repite el proceso dándole los permisos oportunos. <br>
+<img alt="alt text" src="/images2/image-22.png" />
+Luego se accede a la carpeta de la práctica, se crea el fichero .env y se modifica de nuevo. <br>
+<img alt="alt text" src="/images2/image-23.png" />
+Se inicia el entorno virtual. <br>
+<img alt="alt text" src="/images2/image-24.png" />
+Se instalan las dependecias. <br>
+<img alt="alt text" src="/images2/image-25.png" /> <br>
+<img alt="alt text" src="/images2/image-26.png" />
+Se modifican los ficheros y se inicia el entorno virtual. <br>
+<img alt="alt text" src="/images2/image-28.png" /> <br>
+Se comprueba que se ha desplegado bien. <br>
+<img alt="alt text" src="/images2/image-29.png" /> <br>
+Ahora se comprueba que gunicorn funciona con el comando: gunicorn --workers 4 --bind 0.0.0.0:5000 wsgi:app. Después se obtiene la ruta para configurar más adelante con which unicorn y por último se para el entorno virtual. <br>
+<img alt="alt text" src="/images2/image-30.png" /></p>
+<h2 id="despliegue-con-nginx-repositorio">Despliegue con Nginx repositorio</h2>
+<p>Se crea el archivo en systemd con los nuevos datos. <br>
+<img alt="alt text" src="/images2/image-32.png" />
+Se habilita y se inicia el servicio. <br>
+<img alt="alt text" src="/images2/image-33.png" />
+Se crea el archivo de configuración con los siguientes datos. <br>
+<img alt="alt text" src="/images2/image-34.png" />
+Se cra el archivo simbólico y se comprueba su existencia. <br>
+<img alt="alt text" src="/images2/image-35.png" />
+Se actualiza el nginx. <br>
+<img alt="alt text" src="/images2/image-36.png" />
+Se añade la ip de la máquina virtual y el server_name al archivo host de la máquina anfitriona. <br>
+<img alt="alt text" src="/images2/image-37.png" /><br>
+Se comprueba que es correcto el despliegue. <br>
+<img alt="alt text" src="/images2/image-38.png" /></p>
+<h2 id="cuestiones">Cuestiones</h2>
+<h4 id="cuestion-1-busca-lee-entiende-y-explica-que-es-y-para-que-sirve-un-servidor-wsgi">Cuestion 1. Busca, lee, entiende y explica qué es y para que sirve un servidor WSGI</h4>
+<p>WSGI (Web Server Gateway Interface) es un estándar de interfaz entre servidores web y aplicaciones web o frameworks desarrollados en Python, diseñado para mejorar la interoperabilidad y la eficiencia de las aplicaciones web.
+Sirve para que las aplicaciones web escritas en Python se comuniquen con servidores web como Nginx o Apache, actúa como un intermediario que traduce las solicitudes del servidor en un formato que la aplicación puede entender y luego devuelve la respuesta al cliente y es esencial para ejecutar aplicaciones web Python en producción, asegurando compatibilidad y buen rendimiento.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>
